@@ -1,11 +1,11 @@
 #[derive(Clone, Debug)]
 pub struct Board {
-    positions: Vec<Option<usize>>
+    positions: Vec<Option<usize>>,
 }
 
 impl Board {
     pub fn empty_board(size: usize) -> Board {
-        Board{positions: vec!(None; size)}
+        Board { positions: vec!(None; size) }
     }
 
     fn size(&self) -> usize {
@@ -21,10 +21,9 @@ impl Board {
                         continue;
                     }
                 }
-                if self.valid(x,y) {
+                if self.valid(x, y) {
                     print!(" ");
-                }
-                else {
+                } else {
                     print!("X");
                 }
             }
@@ -34,12 +33,12 @@ impl Board {
     }
 
 
-    pub fn put(&self, x:usize, y:usize) -> Board {
+    pub fn put(&self, x: usize, y: usize) -> Board {
         let mut new_positions: Vec<Option<usize>> = vec!(None; self.size());
         for n in 0..self.size() {
             new_positions[n] = if n == x { Some(y) } else { self.positions[n] };
         }
-        Board{positions: new_positions}
+        Board { positions: new_positions }
     }
 
     /// ```
@@ -90,9 +89,9 @@ impl Board {
 
     pub fn solve(self) -> Vec<Board> {
         if self.solved() {
-            return vec!(self);
+            return vec![self];
         }
-        let mut solutions = vec!();
+        let mut solutions = vec![];
         for n in 0..self.size() {
             if self.positions[n].is_none() {
                 for p in 0..self.size() {
@@ -104,6 +103,6 @@ impl Board {
                 break;
             }
         }
-        return solutions
+        return solutions;
     }
 }
